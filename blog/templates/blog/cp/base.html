@@ -1,0 +1,34 @@
+{% extends "blog/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block right_menu %}
+    <h3>{% trans "Control Panel Management" %}</h3>
+    <ul>
+        <li><a href="{% url "blog_article_control_panel_home" %}">{% trans "Article Control Panel" %}</a></li>
+        <li><a href="{% url "blog_category_control_panel_home" %}">{% trans "Category Control Panel" %}</a></li>
+        <li><a href="{% url "blog_page_control_panel_home" %}">{% trans "Page Control Panel" %}</a></li>
+        <li><a href="{% url "blog_tag_control_panel_home" %}">{% trans "Tag Control Panel" %}</a></li>
+        <li><a href="{% url "blog_comment_control_panel_home" %}">{% trans "Comment Control Panel" %}</a></li>
+        <ul>
+            <li><a href="{% url "blog_comment_list_reported_control_panel" %}">{% trans "Reported Comments" %}</a></li>
+        </ul>
+    </ul>
+{% endblock %}

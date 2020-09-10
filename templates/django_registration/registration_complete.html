@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Thank You for Registering on {{ site_name }}" %}{% endblock %}
+
+{% url "contact_us" as contact_us %}
+
+{% block header %}<h1>{% trans "You have successfully registered on {{ site_name }}" %}</h1>{% endblock %}
+
+{% block body %}
+    {% blocktrans %}
+        <p>
+            You now need to confirm your email address by clicking on the link in the email that you have just been
+            sent. Until you have confirmed your email address your account will remain in an inactive state.
+        </p>
+        <p>
+            If you have any questions at all or just want to provide some feedback then by all means
+            <a href="{{ contact_us }}">contact us</a> and we will attempt to get back to you as soon as possible.
+        </p>
+    {% endblocktrans %}
+{% endblock %}

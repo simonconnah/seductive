@@ -1,0 +1,67 @@
+{% extends "blog/cp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Page Control Panel" %}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "Page Control Panel" %}</h1>
+{% endblock %}
+
+{% block main_body %}
+    {% if user.is_authenticated and perms.blog.add_blogpage %}
+        {% url "blog_page_create" as page_create %}
+        {% blocktrans %}
+            <p>
+                <a href="{{ page_create }}"><button type="button" class="btn btn-success">Create Page</button></a>.
+            </p>
+        {% endblocktrans %}
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Author" %}</th>
+                <th scope="col">{% trans "Title" %}</th>
+                {% if user.is_authenticated and perms.blog.change_blogpage %}
+                    <th scope="col">{% trans "Update" %}</th>
+                {% endif %}
+                {% if user.is_authenticated and perms.blog.delete_blogpage %}
+                    <th scope="col">{% trans "Delete" %}</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for page in object_list %}
+                <tr>
+                    <th scope="row"><a href="{% url "usercp_profile" page.author.id %}">{{ page.author.username }}</a></th>
+                    <td><a href="{% url "blog_page_detail" page.id page.slug %}">{{ page.title }}</a></td>
+                    {% if user.is_authenticated and perms.blog.change_blogpost %}
+                        <td><a href="{% url "blog_page_update" page.id %}"><button type="button" class="btn btn-info">{% trans "Update" %}</button></a></td>
+                    {% endif %}
+                    {% if user.is_authenticated and perms.blog.delete_blogpost %}
+                        <td><a href="{% url "blog_page_delete" page.id %}"><button type="button" class="btn btn-danger">{% trans "Delete" %}</button></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

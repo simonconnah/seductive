@@ -1,0 +1,26 @@
+[
+  {
+    "model": "blog.BlogTag",
+    "pk": 1,
+    "fields": {
+      "name": "Tag 1",
+      "slug": "tag-1",
+      "description": "Test tag.",
+      "meta_description": "Meta description for the test tag.",
+      "use_no_follow": true,
+      "owner_id": 2
+    }
+  },
+  {
+    "model": "blog.BlogTag",
+    "pk": 2,
+    "fields": {
+      "name": "Test Tag 2",
+      "slug": "test-tag-2",
+      "description": "This is the second test tag.",
+      "meta_description": "Meta description for the second test tag.",
+      "use_no_follow": true,
+      "owner_id": 2
+    }
+  }
+]

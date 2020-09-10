@@ -1,0 +1,41 @@
+{% extends "blog/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Your Comment Vote Succeeded" %}
+{% endblock %}
+
+{% block header %}
+    <h1 id="vote-success-header">{% trans "Your Comment Vote Succeeded" %}</h1>
+{% endblock %}
+
+{% block main_body %}
+    {% url "home" as home_page %}
+    {% blocktrans %}
+        <p>
+            Your comment vote has succeeded. You can return to the article by clicking <a href="">here</a> or you can
+            go back to the comment by clicking <a href="">here</a>.
+        </p>
+        <p>
+            Please return to the <a href="{{ home_page }}">homepage</a>.
+        </p>
+    {% endblocktrans %}
+{% endblock %}

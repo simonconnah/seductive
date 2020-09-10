@@ -1,0 +1,58 @@
+[
+  {
+    "model": "blog.BlogPost",
+    "pk": 1,
+    "fields": {
+      "title": "Test Post 1",
+      "slug": "test-post-1",
+      "short_content": "This is test post 1 making sure that the short content is working.",
+      "long_content": "This is the long content for the blog post Test Post 1. It should contain more data than the short_content.",
+      "meta_description": "This is a meta description for Test Post 1.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "author": 2
+    }
+  },
+  {
+    "model": "blog.BlogPost",
+    "pk": 2,
+    "fields": {
+      "title": "Test Post 2",
+      "slug": "test-post-2",
+      "short_content": "This is some short content for Test Post 2.",
+      "long_content": "This is the long content for the blog post Test Post 2. We are just filling this up with random text.",
+      "meta_description": "This is a meta description for Test Post 2.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "author": 2
+    }
+  },
+  {
+    "model": "blog.BlogPost",
+    "pk": 3,
+    "fields": {
+      "title": "Test Post 3",
+      "slug": "test-post-3",
+      "short_content": "We want to see if the short content field is working correctly for post 3.",
+      "long_content": "This is the long content for the blog post Test Post 3. Today is a good day.",
+      "meta_description": "This is a meta description for Test Post 3.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "author": 2
+    }
+  },
+  {
+    "model": "blog.BlogPost",
+    "pk": 4,
+    "fields": {
+      "title": "Test Post 4",
+      "slug": "test-post-4",
+      "short_content": "This is short content for Test Post 4",
+      "long_content": "This is the long content for the blog post Test Post 4. Final blog post fixture today.",
+      "meta_description": "This is a meta description for Test Post 4.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "author": 2
+    }
+  }
+]

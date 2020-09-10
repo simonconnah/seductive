@@ -1,0 +1,46 @@
+{% extends "blog/cp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Comments on " %}{{ article.title }}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "Comments on " %}{{ article.title }}</h1>
+{% endblock %}
+
+{% block main_body %}
+    {% for comment in object_list %}
+        <h3><a href="{% url "blog_comment_detail" comment.id %}">{{ comment.title }}</a></h3><br/>
+        <p>
+            {% if comment.author.username %}
+                <strong>{% trans "Written by: " %}</strong><a href="{% url "usercp_profile" comment.author.id %}">{{ comment.author }}</a> {% trans "on" %} {{ comment.date_posted|date:"D d M Y" }}<br/>
+            {% else %}
+                <strong>{% trans "Written by an Annoymous User on: " %}</strong>{{ comment.date_posted|date:"D d M Y" }}<br/>
+            {% endif %}
+            <strong>{% trans "Edited on: " %}</strong>{{ comment.date_updated|date:"D d M Y" }}<br/>
+            <strong>{% trans "Liked by: " %}</strong>{{ comment.positive_votes }}<strong>{% trans " Disliked by: " %}</strong>{{ comment.negative_votes }}
+        </p>
+        <p>
+            {{ comment.content }}
+        </p>
+    {% endfor %}
+{% endblock %}

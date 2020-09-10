@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block right_menu_no_override %}
+    <h3>{% trans "Site Navigation" %}</h3>
+    <ul>
+        <li><a href="{% url "home" %}">{% trans "Home" %}</a></li>
+        <li><a href="{% url "blog_page_list" %}">{% trans "Pages" %}</a></li>
+        <li><a href="{% url "blog_article_list" %}">{% trans "Articles" %}</a></li>
+        <li><a href="{% url "blog_category_list" %}">{% trans "Categories" %}</a></li>
+        <li><a href="{% url "blog_tag_list" %}">{% trans "Tags" %}</a></li>
+        {# TODO: Should we add a link to view all comments if they have permissions? #}
+    </ul>
+    <h3>{% trans "User Management" %}</h3>
+    {% if perms.usercp.can_access_control_panel %}
+        <a href="{% url "control_panel" %}">{% trans "Control Panel" %}</a><br/>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="{% url "usercp_profile" user.id %}">{% trans "User Profile" %}</a><br/>
+        <a href="{% url "logout" %}">{% trans "Logout" %}</a>
+    {% else %}
+        <a href="{% url "login" %}">{% trans "Login" %}</a>
+    {% endif %}
+    {% if perms.blogpost.add_blogpost or perms.blogcategory.add_blogcategory or perms.blogtag.add_blogtag or perms.blogpage.add_blogpage %}
+        <h3>{% trans "Blog Management" %}</h3>
+        <ul>
+            {% if perms.blogpost.add_blogpost %}
+                <li><a href="{% url "blog_article_create" %}">{% trans "Create Article" %}</a></li>
+            {% endif %}
+            {% if perms.blogcategory.add_blogcategory %}
+                <li><a href="{% url "blog_category_create" %}">{% trans "Create Category" %}</a></li>
+            {% endif %}
+            {% if perms.blogtag.add_blogtag %}
+                <li><a href="{% url "blog_tag_create" %}">{% trans "Create Tag" %}</a></li>
+            {% endif %}
+            {% if perms.blogpage.add_blogpage %}
+                <li><a href="{% url "blog_page_create" %}">{% trans "Create Page" %}</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+{% endblock %}

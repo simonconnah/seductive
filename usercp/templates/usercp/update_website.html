@@ -1,0 +1,41 @@
+{% extends "usercp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Update Your Website" %}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "Update Your Website" %}</h1>
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <p>
+        {% trans "Your current website is: " %} <a href="{% url "home" %}">{{ object.website_name }}</a>
+    </p>
+    <form action="{% url 'update_profile_website' object.id %}" method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="submit" value="{% trans "Update Your Website" %}"/>
+    </form>
+{% endblock %}

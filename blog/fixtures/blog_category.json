@@ -1,0 +1,13 @@
+[
+  {
+    "model": "blog.BlogCategory",
+    "pk": 1,
+    "fields": {
+      "name": "Category 1",
+      "slug": "category-1",
+      "description": "This is the description for Category 1.",
+      "meta_description": "This is a meta description for Category 1",
+      "owner": 2
+    }
+  }
+]

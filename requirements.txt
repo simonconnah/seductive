@@ -1,0 +1,17 @@
+argon2-cffi==18.1.0
+cffi==1.11.5
+confusable-homoglyphs==3.0.0
+coverage==4.5.1
+Django==2.1.2
+django-crispy-forms==1.7.2
+django-debug-toolbar==1.10.1
+django-guardian==1.4.9
+django-registration==3.0
+Pillow==5.3.0
+psycopg2-binary==2.7.5
+pycparser==2.19
+pytz==2018.5
+selenium==3.14.1
+six==1.11.0
+sqlparse==0.2.4
+urllib3==1.23

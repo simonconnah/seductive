@@ -1,0 +1,68 @@
+{% extends "usercp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% blocktrans with user=user.username %}
+        Welcome to your profile {{ user }}
+    {% endblocktrans %}
+{% endblock %}
+
+{% block header %}
+    <h1>
+        {% blocktrans with user=user.username %}
+            Welcome to your profile {{ user }}
+        {% endblocktrans %}
+    </h1>
+{% endblock %}
+
+{% block main_body %}
+    {% blocktrans %}
+        <p>
+            All of the information shown on this page is private and only you are able to view it. We will not share
+            your information with any third parties at all without your explicit permission.
+        </p>
+    {% endblocktrans %}
+
+    {% load crispy_forms_tags %}
+
+    {% if not user_profile.website %}
+    <form action="{% url 'usercp_profile' user.id %}" method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="submit" value="{% trans "Add Your Personal Website" %}"/>
+    </form>
+    {% endif %}
+
+    <p>
+        {% trans "Your username is: " %} <strong>{{ user.username }}</strong><br/>
+        {% trans "You joined on: " %} <strong>{{ user.date_joined }}</strong><br/>
+        {% trans "You last logged into this website on this date: " %} <strong>{{ user.last_login }}</strong><br/>
+        {% if user_profile.website %}
+            {% trans "Your personal website is: " %} <a href="{% url "home" %}"><strong>{{ user_profile.website_name }}</strong></a><br/>
+        {% endif %}
+    </p>
+    <p>
+        {% trans "If you wish to change your password then you can do so here: " %}<a href="{% url "password_change" %}">{% trans "Change password" %}</a>.<br/>
+        {% if user_profile is not None %}
+            {% trans "You can update your website details " %}<a href="{% url "update_profile_website" user_profile.id %}">{% trans "here" %}</a>.
+        {% endif %}
+    </p>
+{% endblock %}

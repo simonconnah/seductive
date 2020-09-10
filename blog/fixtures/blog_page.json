@@ -1,0 +1,24 @@
+[
+  {
+    "model": "blog.BlogPage",
+    "pk": 1,
+    "fields": {
+      "title": "Page 1",
+      "slug": "page-1",
+      "content": "This is the first page on the website.",
+      "meta_description": "Meta description for the first page on the website.",
+      "author": 2
+    }
+  },
+  {
+    "model": "blog.BlogPage",
+    "pk": 2,
+    "fields": {
+      "title": "Page 2",
+      "slug": "page-2",
+      "content": "This is the second page on the website.",
+      "meta_description": "Meta description for the second page on the website.",
+      "author": 2
+    }
+  }
+]

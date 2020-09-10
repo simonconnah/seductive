@@ -1,0 +1,68 @@
+{% extends "blog/cp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Comment Control Panel" %}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "Comment Control Panel" %}</h1>
+{% endblock %}
+
+{% block main_body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Author" %}</th>
+                <th scope="col">{% trans "Title" %}</th>
+                {% if user.is_authenticated and perms.blog.change_blogcomment %}
+                    <th scope="col">{% trans "Update" %}</th>
+                {% endif %}
+                {% if user.is_authenticated and perms.blog.delete_blogcomemnt %}
+                    <th scope="col">{% trans "Delete" %}</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in object_list %}
+                <tr>
+                    <th scope="row">
+                        {% if comment.author.username %}
+                            <a href="{% url "usercp_profile" comment.author.id %}">{{ comment.author.username }}</a></th>
+                        {% else %}
+                            <strong>{% trans "This comment was written by an Anonymous User" %}</strong></th>
+                        {% endif %}
+                            <td><a href="{% url "blog_comment_detail" comment.id %}">{{ comment.title }}</a></td>
+                        {% if user.is_authenticated and perms.blog.change_blogcomment %}
+                            {# TODO: Check if user has permissions to update specific comment #}
+                            {# TODO: The current permission check does not work because it does not check if the user is allowed to edit other peoples comments #}
+                            <td><a href="{% url "blog_comment_update" comment.id %}"><button type="button" class="btn btn-info">{% trans "Update" %}</button></a></td>
+                        {% else %}
+                            <td><button class="btn btn-info">{% trans "Can Not Update" %}</button></td>
+                        {% endif %}
+                        {% if user.is_authenticated and perms.blog.delete_blogcomment %}
+                            <td><a href="{% url "blog_comment_delete" comment.id %}"><button type="button" class="btn btn-danger">{% trans "Delete" %}</button></a></td>
+                        {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

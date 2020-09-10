@@ -1,0 +1,10 @@
+.idea/*
+__pycache__/
+*.py[cod]
+venv/*
+blog/migrations/0*
+usercp/migrations/0*
+images/migrations/0*
+seductive_workspace.code-workspace
+.vscode/*
+geckodriver.log

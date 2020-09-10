@@ -1,0 +1,47 @@
+[
+  {
+    "model": "blog.BlogComment",
+    "pk": 1,
+    "fields": {
+      "title": "First Comment",
+      "slug": "first-comment",
+      "content": "This is the first comment on the site.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2014-06-16T14:41:28+00:00",
+      "positive_votes": 5,
+      "negative_votes": 3,
+      "author": 2,
+      "article_commented_on": 1
+    }
+  },
+  {
+    "model": "blog.BlogComment",
+    "pk": 2,
+    "fields": {
+      "title": "Test Comment",
+      "slug": "test-comment",
+      "content": "This is a test comment on the site.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "positive_votes": 1,
+      "negative_votes": 4,
+      "author": 2,
+      "article_commented_on": 1
+    }
+  },
+  {
+    "model": "blog.BlogComment",
+    "pk": 3,
+    "fields": {
+      "title": "Test Comment Again",
+      "slug": "test-comment-again",
+      "content": "This is another test comment on the site.",
+      "date_posted": "2013-03-16T17:41:28+00:00",
+      "date_updated": "2013-03-16T17:41:28+00:00",
+      "positive_votes": 5,
+      "negative_votes": 3,
+      "author": 2,
+      "article_commented_on": 1
+    }
+  }
+]

@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "List of Articles on " %}{{ site_name }}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "List of Articles on " %}{{ site_name }}</h1>
+{% endblock %}
+
+{% block main_body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Title" %}</th>
+                <th scope="col">{% trans "Author" %}</th>
+                <th scope="col">{% trans "Comments" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in object_list %}
+                <tr>
+                    <th scope="row"><a href="{% url "blog_article_detail" article.id article.slug %}">{{ article.title }}</a></th>
+                    <td><a href="{% url "usercp_profile" article.author.id %}">{{ article.author }}</a></td>
+                    <td>{{ article.num_comments }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "blog/cp/base.html" %}
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Article Control Panel" %}
+{% endblock %}
+
+{% block header %}
+    <h1>{% trans "Article Control Panel" %}</h1>
+{% endblock %}
+
+{% block main_body %}
+    {% if user.is_authenticated and perms.blog.add_blogpost %}
+        {% url "blog_category_create" as category_create %}
+        {% blocktrans %}
+            <p>
+                <a href="{{ category_create }}"><button type="button" class="btn btn-success">Create Category</button></a>.
+            </p>
+        {% endblocktrans %}
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Owner" %}</th>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Description" %}</th>
+                {% if user.is_authenticated and perms.blog.change_blogcategory %}
+                    <th scope="col">{% trans "Update" %}</th>
+                {% endif %}
+                {% if user.is_authenticated and perms.blog.delete_blogcategory %}
+                    <th scope="col">{% trans "Delete" %}</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in object_list %}
+                <tr>
+                    <th scope="row"><a href="{% url "usercp_profile" category.owner.id %}">{{ category.owner.username }}</a></th>
+                    <td><a href="{% url "blog_category_detail" category.id category.slug %}">{{ category.name }}</a></td>
+                    <td>{{ category.description }}</td>
+                    {% if user.is_authenticated and perms.blog.change_blogcategory %}
+                        <td><a href="{% url "blog_category_update" category.id %}"><button type="button" class="btn btn-info">{% trans "Update" %}</button></a></td>
+                    {% endif %}
+                    {% if user.is_authenticated and perms.blog.delete_blogcategory %}
+                        <td><a href="{% url "blog_category_delete" category.id %}"><button type="button" class="btn btn-danger">{% trans "Delete" %}</button></a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

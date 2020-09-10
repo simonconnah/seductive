@@ -1,0 +1,35 @@
+{% comment %}
+    seductiveblog - an open source blogging platform
+    Copyright (C) 2018, Simon Connah
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+{% endcomment %}
+
+{% load i18n %}
+
+{% blocktrans %}
+Thank you for registering on {{ site_name }} {{ user }}. You now need to activate your account by clicking on
+this link:
+{% endblocktrans %}
+{# TODO: Change to correct URL for production #}
+<a href="http://localhost:8000/accounts/activate/{{ activation_key }}">{% trans "Activate your account" %}</a>
+{% blocktrans %}
+You have {{ expiration_days }} days to activate your account from the time this email was sent otherwise it will remain
+inactive forever and you'll need to either contact us to delete your account so you can make a new one or just leave it
+as inactive if you have no intention of using the site in the future.
+
+Please note that your email address will not be used for any purpose without your explicit consent.
+
+{{ site_name }}
+{% endblocktrans %}
